@@ -34,6 +34,6 @@ public class Mechanic {
 
     @Override
     public String toString() {
-        return "Nombre y Apellido: " + this.name + " " + this.surname;
+        return "Nombre y Apellidos: " + this.name + " " + this.surname;
     }
 }
