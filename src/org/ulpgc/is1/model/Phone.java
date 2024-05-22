@@ -1,12 +1,21 @@
 package org.ulpgc.is1.model;
 
-public record Phone(String number) {
+public class Phone {
+    private String number;
 
-    public String isValid() {
-        if (!number.matches("\\d{9}")) {
-            throw new IllegalArgumentException("El número de teléfono debe tener 9 digitos.");
-        } else {
-            return this.number;
-        }
+    public Phone(String number) {
+        this.number = number;
+    }
+
+    public boolean isValid() {
+        return number.matches("\\d{9}");
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

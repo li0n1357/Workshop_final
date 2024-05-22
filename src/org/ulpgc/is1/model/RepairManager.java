@@ -1,71 +1,76 @@
 package org.ulpgc.is1.model;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RepairManager {
-    private final Map<String, Mechanic> mechanics;
-    private final Map<String, Vehicle> vehicles;
-    private final Map<Integer, Repair> repairs;
-    private final List<SparePart> parts;
+    private List<Mechanic> mechanics;
+    private List<Vehicle> vehicles;
+    private List<SparePart> spareParts;
+    private List<Repair> repairs;
 
     public RepairManager() {
-        this.mechanics = new HashMap<>();
-        this.vehicles = new HashMap<>();
-        this.repairs = new HashMap<>();
-        this.parts = new ArrayList<>();
+        this.mechanics = new ArrayList<>();
+        this.vehicles = new ArrayList<>();
+        this.spareParts = new ArrayList<>();
+        this.repairs = new ArrayList<>();
     }
 
-    public void addMechanic(String name, Mechanic mechanic) {
-        mechanics.put(name, mechanic);
+    public void addMechanic(Mechanic mechanic) {
+        this.mechanics.add(mechanic);
     }
 
-    public void addVehicle(String model, Vehicle vehicle) {
-        vehicles.put(model, vehicle);
+    public Mechanic getMechanic(int index) {
+        return this.mechanics.get(index);
     }
 
-    public void addPart(SparePart part) {
-        parts.add(part);
+    public void addVehicle(Vehicle vehicle) {
+        this.vehicles.add(vehicle);
     }
 
-    public Mechanic getMechanic(String name) {
-        return mechanics.get(name);
+    public Vehicle getVehicle(int index) {
+        return this.vehicles.get(index);
     }
 
     public Vehicle getVehicle(String model) {
-        return vehicles.get(model);
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getModel().equals(model)) {
+                return vehicle;
+            }
+        }
+        return null; // Si no se encuentra
     }
 
-    public void addRepair(Repair repair) {
-        repairs.put(repair.getID(), repair);
-        Vehicle vehicle = repair.getVehicle();
-        if (vehicle != null) {
-            vehicle.addRepair(repair);
+    public void addPart(SparePart part) {
+        this.spareParts.add(part);
+    }
+
+    public SparePart getParts(String name) {
+        for (SparePart part : spareParts) {
+            if (part.getName().equals(name)) {
+                return part;
+            }
+        }
+        return null; // Si no se encuentra
+    }
+
+    public void repair(Repair repair) {
+        this.repairs.add(repair);
+        repair.getVehicle().addRepair(repair);
+        for (Mechanic mechanic : mechanics) {
+            mechanic.addRepair(repair);
         }
     }
 
     public void removeVehicle(String model) {
-        vehicles.remove(model);
+        this.vehicles.removeIf(vehicle -> vehicle.getModel().equals(model));
     }
 
     public int getNumberOfVehicles() {
-        return vehicles.size();
+        return this.vehicles.size();
     }
 
-    public Map<Integer, Repair> getRepairs() {
-        return repairs;
-    }
-
-    public void repair(Repair repair) {
-        Vehicle vehicle = repair.getVehicle();
-        if (vehicle != null) {
-            addRepair(repair);
-            Payment payment = repair.getPayment();
-            System.out.println("Se ha facturado $" + payment.amount() + " por la reparación.");
-        } else {
-            System.out.println("No se pudo realizar la reparación. Vehículo no encontrado.");
-        }
+    public List<Repair> getRepairs() {
+        return new ArrayList<>(this.repairs);
     }
 }
