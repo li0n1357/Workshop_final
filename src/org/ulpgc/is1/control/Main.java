@@ -52,8 +52,6 @@ public class Main {
 
     public static void main(String[] args) {
         RepairManager repairManager = new RepairManager();
-
-        // Inicializar los datos
         init(repairManager);
 
         // iv. Imprimir por pantalla todos los datos del primer mecánico.
@@ -68,7 +66,7 @@ public class Main {
         List<SparePart> spareParts = Arrays.asList(sparePart1, sparePart2);
 
         Payment payment = new Payment(new Date(), 15000);
-        Vehicle vehicle2 = repairManager.getVehicle(1); // Asegúrate de obtener el vehículo correcto
+        Vehicle vehicle2 = repairManager.getVehicle(1);
         Repair repair = new Repair(new Date(), "Arreglo de motor", 5, payment, BreakdownTypes.MECHANICAL, spareParts, vehicle2);
 
         repairManager.repair(repair);
@@ -77,7 +75,7 @@ public class Main {
         System.out.println("Pago formalizado -> " + repair.getPayment());
 
         // viii. Borrar el primer vehículo.
-        Vehicle vehicle1 = repairManager.getVehicle(0); // Asegúrate de obtener el vehículo correcto
+        Vehicle vehicle1 = repairManager.getVehicle(0);
         repairManager.removeVehicle(vehicle1.getModel());
 
         // Verificar si el primer vehículo ha sido eliminado
