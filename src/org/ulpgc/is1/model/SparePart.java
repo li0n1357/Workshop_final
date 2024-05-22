@@ -20,8 +20,6 @@ public class SparePart {
         return this.price;
     }
 
-
-
     @Override
     public String toString() {
         return "Nombre: " + this.name + ". Precio: " + this.price;

@@ -4,38 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mechanic {
-    private String name;
-    private String surname;
-    private ArrayList<Repair> repairs;
+    private final String name;
+    private final String surname;
+    private final List<Repair> repairs;
+    private final RepairManager repairManager;
 
-    public Mechanic(String name, String surname) {
+    public Mechanic(String name, String surname, RepairManager repairManager) {
         this.name = name;
         this.surname = surname;
-        this.repairs = new ArrayList<Repair>();
+        this.repairs = new ArrayList<>();
+        this.repairManager = repairManager;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return this.name;
     }
 
     public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+        return this.surname;
     }
 
     public void addRepair(Repair repair) {
         this.repairs.add(repair);
     }
 
-    public ArrayList<Repair> getRepair() {
-        return repairs;
+    public RepairManager getRepairManager() {
+        return this.repairManager;
     }
 
     @Override
