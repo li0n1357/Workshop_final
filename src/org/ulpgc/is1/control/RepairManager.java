@@ -1,7 +1,9 @@
-package org.ulpgc.is1.model;
+package org.ulpgc.is1.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.ulpgc.is1.model.*;
+
 
 public class RepairManager {
     private List<Mechanic> mechanics;
@@ -38,7 +40,7 @@ public class RepairManager {
                 return vehicle;
             }
         }
-        return null; // Si no se encuentra
+        return null;
     }
 
     public void addPart(SparePart part) {
@@ -51,7 +53,7 @@ public class RepairManager {
                 return part;
             }
         }
-        return null; // Si no se encuentra
+        return null;
     }
 
     public void repair(Repair repair) {

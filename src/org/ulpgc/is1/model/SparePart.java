@@ -2,6 +2,7 @@ package org.ulpgc.is1.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.ulpgc.is1.control.RepairManager;
 
 public class SparePart {
     private final String name;
